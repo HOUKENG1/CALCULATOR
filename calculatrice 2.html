@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        body{
+            height: 100vh;
+            width: 100vw;
+            background:  linear-gradient(135deg, rgba(107, 191, 240, 0.829) 0%,rgba(106, 73, 184, 0.815) 50%,  rgba(14, 2, 182, 0.856) 100%);
+        }
+        .Calculatrice{
+            background-color: red;
+            margin-top: 50px;
+            margin-left: 480px;
+            width: 400px;
+            height: 550px;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px black;
+            border: 1px solid rgba(19, 17, 17, 0.1);
+        }
+        h1{
+             color: aliceblue;
+        }
+        button{
+            cursor: pointer;
+            margin-top: 25px;
+        }
+        .btn-gray{
+            padding: 25px;
+            border-radius: 20px;
+        }
+        input {
+            padding: 23px;
+            border-radius: 20px;
+            width: 80%;
+        }
+        .ye {
+            padding: 25px;
+            border-radius: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <div class="Calculatrice">
+        <div class="interieur">
+            <h1>CALCULATOR :</h1>
+            <input type="text" id="ecran"  readonly>
+    <button class="btn-gray" onclick="ajout(9)">9</button>
+    <button class="btn-gray" onclick="ajout(8)">8</button>
+    <button class="btn-gray" onclick="ajout(7)">7</button>
+    <button class="ye" onclick="remove()">S<i class="fa-solid fa-delete-left"></i></button>
+    <button class="ye" onclick="removeAll()">A</button><br>
+
+    <button class="btn-gray" onclick="ajout(6)">6</button>
+    <button class="btn-gray" onclick="ajout(5)">5</button>
+    <button class="btn-gray" onclick="ajout(4)">4</button>
+    <button class="ye" onclick="ajout('*')">x</button>
+    <button class="ye" onclick="ajout('/')">/</button> <br>
+
+    <button class="btn-gray" onclick="ajout(3)">3</button>
+    <button class="btn-gray" onclick="ajout(2)">2</button>
+    <button class="btn-gray" onclick="ajout(1)">1</button>
+    <button class="ye" onclick="ajout('+')">+</button>
+    <button class="ye" onclick="ajout('-')">-</button><br>
+
+    <button class="btn-gray" onclick="ajout(0)">0</button>
+    <button class="btn-gray" onclick="ajout(0)">0</button>
+    <button class="btn-gray" onclick="ajout('.')"><b>.</b></button>
+    <button class="ye" onclick="ajouterAns()">ans</button>
+    <button class="ye" onclick="response()">=</button>
+        </div>  
+</div>
+<script>
+
+   let ecran = document.getElementById('ecran');
+    let derniereReponse = ""; // Variable pour stocker le résultat précédent
+
+    function ajout(number){
+        // Si l'écran affiche "Error" ou "0", on réinitialise avant d'ajouter
+        if (ecran.value === "Error" || ecran.value === "0") {
+            ecran.value = number;
+        } else {
+            ecran.value += number;
+        }
+    }
+
+    function response(){
+        try{
+            // On calcule le résultat
+            let resultat = eval(ecran.value);
+            // On le sauvegarde dans notre variable
+            derniereReponse = resultat;
+            // On affiche le résultat sur l'écran
+            ecran.value = resultat;
+        } catch(error){
+            ecran.value = "Error entrer un calcul normale";
+        }
+    }
+
+    function removeAll(){
+        ecran.value = "0";
+    }
+
+    function remove(){
+        // Efface le dernier caractère
+        ecran.value = ecran.value.slice(0, -1);
+        // Si l'écran devient vide, on remet "0"
+        if (ecran.value === "") {
+            ecran.value = "0";
+        }
+    }
+
+    // Fonction appelée par le bouton "ans"
+    function ajouterAns() {
+        ecran.value += derniereReponse;
+    }
+
+</script>
+</body>
+</html>
